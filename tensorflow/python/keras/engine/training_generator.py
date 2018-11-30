@@ -324,14 +324,14 @@ def evaluate_generator(model,
     if enqueuer is not None:
       enqueuer.stop()
 
-  if not isinstance(outs, list):
+  if not isinstance(all_outs, list):
     return np.average(np.asarray(all_outs), weights=batch_sizes)
   else:
     averages = [float(all_outs[-1][0])]  # index 0 = 'loss'
     averages.extend([
         np.average([out[i]
                     for out in all_outs], weights=batch_sizes)
-        for i in range(1, len(outs))
+        for i in range(1, len(all_outs))
     ])
     return averages
 
